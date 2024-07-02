@@ -3,6 +3,7 @@
 # Softmax Regression
 # By Juan Carlos Rojas
 # Copyright 2024, Texas Tech University - Costa Rica
+# modified by William He Yu for project 1
 
 import pickle
 import numpy as np
@@ -30,13 +31,13 @@ test_data = test_data / maxval
 # Train a Softmax Regression classifier
 # Use stochastic approach to save time
 
-#model = sklearn.linear_model.LogisticRegression(\
-#    multi_class = 'multinomial', solver='sag', tol=1e-2, max_iter = 50) 
-
+solv_algo = 'saga'
+tol = 1e-2
+max_iter = 50
 model = sklearn.linear_model.LogisticRegression(\
-    solver='sag', tol=1e-2, max_iter = 50) 
+    solver=solv_algo, tol=tol, max_iter = max_iter) 
 
-print("Training model")
+print("Training model with solver: ", solv_algo, "tol: ", tol, "max_iter: ", max_iter)
 model.fit(train_data, train_labels)
 
 # Make the class predictions
