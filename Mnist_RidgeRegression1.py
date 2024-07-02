@@ -27,14 +27,15 @@ test_data = test_data / maxval
 encoder = sklearn.preprocessing.OneHotEncoder(categories='auto', sparse_output=False)
 train_labels_onehot = encoder.fit_transform(train_labels.reshape(-1, 1))
 test_labels_onehot = encoder.transform(test_labels.reshape(-1, 1))
-num_classes = len(encoder.categories_[0])
+fashion_classes = len(encoder.categories_[0])
 
 #
 # Train classifier
 #
 
 # Train a linear regression classifier
-model = sklearn.linear_model.Ridge(alpha=0.5)
+alph = 0.5
+model = sklearn.linear_model.Ridge(alpha=alph)
 model.fit(train_data, train_labels_onehot)
 
 # Predict the probabilities of each class
@@ -64,7 +65,7 @@ plt.show()
 
 # Display the coefficients as an image
 norm = plt.Normalize(-0.02, 0.02, clip=True)
-for n in range(num_classes):
+for n in range(fashion_classes):
     coef_img = model.coef_[n].reshape(28, 28)
     plt.figure()
     plt.imshow(coef_img, cmap="viridis", norm=norm)
@@ -83,22 +84,22 @@ print("Confusion Matrix:")
 print(cmatrix)
 
 # Accuracy, precision & recall
-print("Accuracy:   {:.3f}".format(sklearn.metrics.accuracy_score(test_labels, pred)))
-print("Precision:  {:.3f}".format(sklearn.metrics.precision_score(test_labels, pred, average='weighted')))
-print("Recall:     {:.3f}".format(sklearn.metrics.recall_score(test_labels, pred, average='weighted')))
+print("Accuracy:   {:.5f}".format(sklearn.metrics.accuracy_score(test_labels, pred)))
+print("Precision:  {:.5f}".format(sklearn.metrics.precision_score(test_labels, pred, average='weighted')))
+print("Recall:     {:.5f}".format(sklearn.metrics.recall_score(test_labels, pred, average='weighted')))
 
 # Per-Class Precision & Recall
 precision = sklearn.metrics.precision_score(test_labels, pred, average=None)
 recall = sklearn.metrics.recall_score(test_labels, pred, average=None)
-for n in range(num_classes):
-    print("  Class {}: Precision: {:.3f} Recall: {:.3f}".format(n, precision[n], recall[n]))
+for n in range(fashion_classes):
+    print("  Class {}: Precision: {:.5f} Recall: {:.5f}".format(n, precision[n], recall[n]))
 
 # Compute the prediction accuracy against the training data
 pred_proba_training = model.predict(train_data)
 print("Against training set:")
 pred_training = np.argmax(pred_proba_training, axis=-1).astype("uint8")
-print("  Accuracy:   {:.3f}".format(sklearn.metrics.accuracy_score(train_labels, pred_training)))
-print("  Precision:  {:.3f}".format(sklearn.metrics.precision_score(train_labels, pred_training, average='weighted')))
-print("  Recall:     {:.3f}".format(sklearn.metrics.recall_score(train_labels, pred_training, average='weighted')))
+print("  Accuracy:   {:.5f}".format(sklearn.metrics.accuracy_score(train_labels, pred_training)))
+print("  Precision:  {:.5f}".format(sklearn.metrics.precision_score(train_labels, pred_training, average='weighted')))
+print("  Recall:     {:.5f}".format(sklearn.metrics.recall_score(train_labels, pred_training, average='weighted')))
 
-
+print(f"\nResults obtained using alpha = {alph}")
