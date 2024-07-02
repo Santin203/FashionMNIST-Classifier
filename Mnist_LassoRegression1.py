@@ -100,4 +100,4 @@ print("  Accuracy:   {:.5f}".format(sklearn.metrics.accuracy_score(train_labels,
 print("  Precision:  {:.5f}".format(sklearn.metrics.precision_score(train_labels, pred_training, average='weighted')))
 print("  Recall:     {:.5f}".format(sklearn.metrics.recall_score(train_labels, pred_training, average='weighted')))
 
-
+print(f"\nResults obtained using alpha = {alph}")
