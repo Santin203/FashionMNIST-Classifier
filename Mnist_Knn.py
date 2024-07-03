@@ -60,12 +60,6 @@ print("Accuracy:   {:.5f}".format(sklearn.metrics.accuracy_score(test_labels, pr
 print("Precision:  {:.5f}".format(sklearn.metrics.precision_score(test_labels, pred, average='weighted')))
 print("Recall:     {:.5f}".format(sklearn.metrics.recall_score(test_labels, pred, average='weighted')))
 
-# Per-Class Precision & Recall
-precision = sklearn.metrics.precision_score(test_labels, pred, average=None)
-recall = sklearn.metrics.recall_score(test_labels, pred, average=None)
-for n in range(num_classes):
-    print("  Class {}: Precision: {:.5f} Recall: {:.5f}".format(n, precision[n], recall[n]))
-
 # Compute the prediction accuracy against the training data
 pred_proba_training = knn.predict(train_data)
 print("Against training set:")
@@ -74,4 +68,4 @@ print("  Accuracy:   {:.5f}".format(sklearn.metrics.accuracy_score(train_labels,
 print("  Precision:  {:.5f}".format(sklearn.metrics.precision_score(train_labels, pred_training, average='weighted')))
 print("  Recall:     {:.5f}".format(sklearn.metrics.recall_score(train_labels, pred_training, average='weighted')))
 
-print(f"\nResults obtained using alpha = {alph}")
+print(f"\nResults obtained using n_neighbors = {neighbors}")
