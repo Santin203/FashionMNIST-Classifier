@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 #
 # Load and prepare input data
 #
-
+labels = ["T-shirt/top", "Trouser", "Pullover", "Dress", "Coat", "Sandal", "Shirt", "Sneaker", "Bag", "Ankle boot"]
 # Load the training and test data from the Pickle file
 with open("mnist_dataset.pickle", "rb") as f:
       train_data, train_labels, test_data, test_labels = pickle.load(f)
@@ -79,7 +79,7 @@ for classidx in range(num_classes):
   mean_img_in_class = np.mean(train_data_this_class, 0)
   plt.figure()
   plt.imshow(mean_img_in_class.reshape(28,28), cmap="gray_r")
-  plt.title("Centroid for Class "+str(classidx))
+  plt.title("Centroid for Class "+labels[classidx])
 
   plt.show()
 
