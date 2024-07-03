@@ -28,13 +28,15 @@ test_data = test_data / maxval
 #
 
 # Train a Random Forest classifier
-n_estimators = 100
-msl = 1e-4
 n_repetitions = 10
+n_estimators = 100
+msl = 1
+mxf = 200
 
 model = sklearn.ensemble.RandomForestClassifier(\
     n_estimators = n_estimators,
-    min_samples_leaf = msl,
+    min_samples_leaf=msl,
+    max_features=mxf,
     n_jobs=-1)
 
 results = []
@@ -48,7 +50,7 @@ for rep in range(n_repetitions):
     results.append(accuracy)
 
 results_np = np.array(results)
-print("With n_estimators={}, min_samples_leaf={}:".format(n_estimators, msl))
+print("With n_estimators={}, min_samples_leaf={}, max_features={}:".format(n_estimators, msl, mxf))
 print("Min:  {:.4f}".format(results_np.min()))
 print("Max:  {:.4f}".format(results_np.max()))
 print("Mean: {:.4f}".format(results_np.mean()))
