@@ -21,18 +21,18 @@ test_data = test_data / maxval
 
 # Train a Random Forest classifier
 n_estimators = 100
-msl_rf = 1e-6
+msl_rf = 1
+max_fs = 200
 n_repetitions = 10
 
 rf = sklearn.ensemble.RandomForestClassifier(\
     n_estimators = n_estimators,
-    min_samples_leaf = msl_rf,
+    min_samples_leaf = msl_rf, max_features = max_fs,
     n_jobs=-1)
 
 # Train a Decision Tree classifier
 msl_dt = 1e-4
 dt = sklearn.tree.DecisionTreeClassifier(min_samples_leaf = msl_dt)
-print("With min_samples_leaf={}".format(msl_dt))
 
 # Train a Softmax Regression classifier
 # Use stochastic approach to save time
@@ -43,10 +43,15 @@ max_iter = 50
 sm = sklearn.linear_model.LogisticRegression(\
     solver=solv_algo, tol=tol, max_iter = max_iter) 
 
+#Train Knn Classifier
+neighbors = 4
+weight = 'distance'
+knn = sklearn.neighbors.KNeighborsClassifier(n_neighbors=neighbors)
 
 er = sklearn.ensemble.VotingClassifier(
     estimators=[('SoftMax', sm),
-                ('RandomForest', rf)
+                ('RandomForest', rf),
+                ('Knn', knn)
                 ],voting='soft')
 
 results = []
@@ -61,7 +66,7 @@ for rep in range(n_repetitions):
 
 results_np = np.array(results)
 print("With a random forest trained with n_estimators={}, min_samples_leaf={}".format(n_estimators, msl_rf))
-#print("With a decision tree trained with min_samples_leaf={}".format(msl_dt))
+print("With a Knn trained with n_neighbors={}, wheights={}".format(neighbors, weight))
 print("With a softmax regression trained with a solver algorithm of={}, tol={}, max_iter={}".format(solv_algo,tol,max_iter))
 print("Model Results:\n")
 print("Min Accuracy:  {:.5f}".format(results_np.min()))
