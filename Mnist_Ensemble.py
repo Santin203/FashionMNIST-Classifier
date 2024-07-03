@@ -34,8 +34,18 @@ msl_dt = 1e-4
 dt = sklearn.tree.DecisionTreeClassifier(min_samples_leaf = msl_dt)
 print("With min_samples_leaf={}".format(msl_dt))
 
+# Train a Softmax Regression classifier
+# Use stochastic approach to save time
+
+solv_algo = 'saga'
+tol = 1e-2
+max_iter = 50
+sm = sklearn.linear_model.LogisticRegression(\
+    solver=solv_algo, tol=tol, max_iter = max_iter) 
+
+
 er = sklearn.ensemble.VotingClassifier(
-    estimators=[('DecisionTree', dt),
+    estimators=[('SoftMax', sm),
                 ('RandomForest', rf)
                 ],voting='soft')
 
@@ -51,11 +61,12 @@ for rep in range(n_repetitions):
 
 results_np = np.array(results)
 print("With a random forest trained with n_estimators={}, min_samples_leaf={}".format(n_estimators, msl_rf))
-print("With a decision tree trained with min_samples_leaf={}".format(msl_dt))
+#print("With a decision tree trained with min_samples_leaf={}".format(msl_dt))
+print("With a softmax regression trained with a solver algorithm of={}, tol={}, max_iter={}".format(solv_algo,tol,max_iter))
 print("Model Results:\n")
-print("Min:  {:.5f}".format(results_np.min()))
-print("Max:  {:.5f}".format(results_np.max()))
-print("Mean: {:.5f}".format(results_np.mean()))
+print("Min Accuracy:  {:.5f}".format(results_np.min()))
+print("Max Accuracy:  {:.5f}".format(results_np.max()))
+print("Mean Accuracy: {:.5f}".format(results_np.mean()))
 print("Std:  {:.5f}".format(results_np.std()))
 
 
