@@ -25,6 +25,8 @@ test_data = test_data / maxval
 # Train classifiers
 #
 
+#Note: The paramters used in this file for each model yeild the best results
+
 # Train a Random Forest classifier
 n_estimators = 100
 msl_rf = 1

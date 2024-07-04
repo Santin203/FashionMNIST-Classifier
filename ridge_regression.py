@@ -34,8 +34,10 @@ fashion_classes = len(encoder.categories_[0])
 # Train classifier
 #
 
+#Note: The paramters used in this file the model yield the best results
+
 # Train a linear regression classifier
-alph = 0.5
+alph = 0.0005
 model = sklearn.linear_model.Ridge(alpha=alph)
 model.fit(train_data, train_labels_onehot)
 

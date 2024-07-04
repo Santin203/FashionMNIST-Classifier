@@ -34,8 +34,10 @@ num_classes = len(encoder.categories_[0])
 # Train classifier
 #
 
+#Note: The paramters used in this file for each model yield the best results
+
 # Train a linear regression classifier
-alph = 0.0005
+alph = 0.00005
 model = sklearn.linear_model.Lasso(alpha=alph)
 model.fit(train_data, train_labels_onehot)
 
