@@ -24,8 +24,10 @@ test_data = test_data / maxval
 # Train classifiers
 #
 
+#Note: The paramters used in this file the model yield the best results
+
 #Train Knn Classifier
-neighbors = 10
+neighbors = 4
 weight = 'distance'
 knn = sklearn.neighbors.KNeighborsClassifier(n_neighbors=neighbors, weights = weight)
 knn.fit(train_data, train_labels)
