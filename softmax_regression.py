@@ -31,6 +31,8 @@ test_data = test_data / maxval
 # Train a Softmax Regression classifier
 # Use stochastic approach to save time
 
+# modified parameters for testing
+# the following parameters are the best
 solv_algo = 'saga'
 tol = 1e-2
 max_iter = 50

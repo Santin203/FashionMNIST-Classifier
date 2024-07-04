@@ -3,6 +3,7 @@
 # Decision Tree Classifier
 # By Juan Carlos Rojas
 # Copyright 2024, Texas Tech University - Costa Rica
+# modified by William He Yu for project 1
 
 import pickle
 import numpy as np
@@ -28,6 +29,7 @@ test_data = test_data / maxval
 #
 
 # Train a Decision Tree classifier
+# modified parameter msl for testing, 1e-4 is the best
 msl = 1e-4
 model = sklearn.tree.DecisionTreeClassifier(min_samples_leaf = msl)
 print("With min_samples_leaf={}".format(msl))
