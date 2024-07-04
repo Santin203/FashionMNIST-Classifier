@@ -1,9 +1,15 @@
+# Introduction to Artificial Intelligence
+# MNIST Dataset
+# Exoploration of data
+# By Jose Campos
+# Based on the code made by Juan Carlos Rojas
+# Copyright 2024, Texas Tech University - Costa Rica
+
 import pickle
 import numpy as np
 import matplotlib.pyplot as plt
 import sklearn.preprocessing
 import sklearn.ensemble
-import sklearn.linear_model
 import sklearn.tree
 
 # Load the training and test data from the Pickle file
@@ -27,12 +33,7 @@ n_repetitions = 10
 
 rf = sklearn.ensemble.RandomForestClassifier(\
     n_estimators = n_estimators,
-    min_samples_leaf = msl_rf, max_features = max_fs,
-    n_jobs=-1)
-
-# Train a Decision Tree classifier
-msl_dt = 1e-4
-dt = sklearn.tree.DecisionTreeClassifier(min_samples_leaf = msl_dt)
+    min_samples_leaf = msl_rf, max_features = max_fs)
 
 # Train a Softmax Regression classifier
 # Use stochastic approach to save time
@@ -54,8 +55,10 @@ er = sklearn.ensemble.VotingClassifier(
                 ('Knn', knn)
                 ],voting='soft')
 
+#Declare array for results
 results = []
 
+#Repeat test to compute average
 for rep in range(n_repetitions):
     
     er.fit(train_data, train_labels)
@@ -64,6 +67,12 @@ for rep in range(n_repetitions):
     print("  Repetition {}: Test accuracy: {:.5f}".format(rep, accuracy))
     results.append(accuracy)
 
+# Confusion matrix
+cmatrix = sklearn.metrics.confusion_matrix(test_labels, pred)
+print("Confusion Matrix:")
+print(cmatrix)
+
+#Print Results
 results_np = np.array(results)
 print("With a random forest trained with n_estimators={}, min_samples_leaf={}".format(n_estimators, msl_rf))
 print("With a Knn trained with n_neighbors={}, wheights={}".format(neighbors, weight))

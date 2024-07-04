@@ -3,6 +3,7 @@
 # Lasso Linear Regression
 # By Juan Carlos Rojas
 # Copyright 2024, Texas Tech University - Costa Rica
+#Modified by Jose Campos for Project #1
 
 import pickle
 import numpy as np
