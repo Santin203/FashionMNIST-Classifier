@@ -1,8 +1,9 @@
 # Introduction to Artificial Intelligence
 # MNIST Dataset
-# Ridge Regression
+# Lasso Linear Regression
 # By Juan Carlos Rojas
 # Copyright 2024, Texas Tech University - Costa Rica
+#Modified by Jose Campos for Project #1
 
 import pickle
 import numpy as np
@@ -27,15 +28,17 @@ test_data = test_data / maxval
 encoder = sklearn.preprocessing.OneHotEncoder(categories='auto', sparse_output=False)
 train_labels_onehot = encoder.fit_transform(train_labels.reshape(-1, 1))
 test_labels_onehot = encoder.transform(test_labels.reshape(-1, 1))
-fashion_classes = len(encoder.categories_[0])
+num_classes = len(encoder.categories_[0])
 
 #
 # Train classifier
 #
 
+#Note: The paramters used in this file for each model yield the best results
+
 # Train a linear regression classifier
-alph = 0.5
-model = sklearn.linear_model.Ridge(alpha=alph)
+alph = 0.00005
+model = sklearn.linear_model.Lasso(alpha=alph)
 model.fit(train_data, train_labels_onehot)
 
 # Predict the probabilities of each class
@@ -64,12 +67,10 @@ plt.show()
 #"""
 
 # Display the coefficients as an image
-norm = plt.Normalize(-0.02, 0.02, clip=True)
-for n in range(fashion_classes):
+for n in range(num_classes):
     coef_img = model.coef_[n].reshape(28, 28)
     plt.figure()
-    plt.imshow(coef_img, cmap="viridis", norm=norm)
-    #plt.imshow(coef_img, cmap="gray_r")
+    plt.imshow(coef_img, cmap="viridis", norm=plt.Normalize(-0.01, 0.01, clip=True))
     plt.title("Coefficients for class "+str(n))
 plt.show()
 
@@ -91,7 +92,7 @@ print("Recall:     {:.5f}".format(sklearn.metrics.recall_score(test_labels, pred
 # Per-Class Precision & Recall
 precision = sklearn.metrics.precision_score(test_labels, pred, average=None)
 recall = sklearn.metrics.recall_score(test_labels, pred, average=None)
-for n in range(fashion_classes):
+for n in range(num_classes):
     print("  Class {}: Precision: {:.5f} Recall: {:.5f}".format(n, precision[n], recall[n]))
 
 # Compute the prediction accuracy against the training data
