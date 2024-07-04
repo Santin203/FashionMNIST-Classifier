@@ -3,6 +3,7 @@
 # Random Forest Classifier
 # By Juan Carlos Rojas
 # Copyright 2024, Texas Tech University - Costa Rica
+# Modified by: Santiago Jimenez
 
 import pickle
 import numpy as np
@@ -28,6 +29,7 @@ test_data = test_data / maxval
 #
 
 # Train a Random Forest classifier
+# Modified parameters to improve accuracy
 n_repetitions = 10
 n_estimators = 100
 msl = 1
