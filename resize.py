@@ -3,7 +3,7 @@
 # Program to resize images to a target size
 # By Juan Carlos Rojas
 # Copyright 2024, Texas Tech University - Costa Rica
-# modified by William He Yu for project 1
+# Modified by William He Yu for project 1
 
 import pickle
 import numpy as np

@@ -1,9 +1,9 @@
 # Introduction to Artificial Intelligence
 # MNIST Dataset
 # Exoploration of data
-# By Jose Campos
 # Based on the code made by Juan Carlos Rojas
 # Copyright 2024, Texas Tech University - Costa Rica
+# Modified by: Jose Campos
 
 import pickle
 import numpy as np
