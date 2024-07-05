@@ -1,8 +1,8 @@
 # Introduction to Artificial Intelligence
 # MNIST Dataset
-# Exoploration of data
-# By Jose Campos
-# Based on the code made by Juan Carlos Rojas
+# Heterogeneous Ensemble Classifier
+# By Jose Campos and William He Yu
+# Based on codes made by Juan Carlos Rojas
 # Copyright 2024, Texas Tech University - Costa Rica
 
 import pickle
@@ -13,7 +13,15 @@ import sklearn.ensemble
 import sklearn.tree
 
 # Load the training and test data from the Pickle file
-with open("mnist_dataset.pickle", "rb") as f:
+# Availabe sizes: 24, 20, 16, 12, 10, 8, 6, 4
+
+size = 24
+filename = "mnist_dataset_{}.pickle".format(size)
+
+# Use this filename if you want to use the original dataset
+#filename = "mnist_dataset.pickle"
+
+with open(filename, "rb") as f:
       train_data, train_labels, test_data, test_labels = pickle.load(f)
 
 # Scale pixels to range 0-1.0
@@ -35,7 +43,7 @@ n_repetitions = 10
 
 rf = sklearn.ensemble.RandomForestClassifier(\
     n_estimators = n_estimators,
-    min_samples_leaf = msl_rf, max_features = max_fs)
+    min_samples_leaf = msl_rf, max_features = max_fs, n_jobs=-1)
 
 # Train a Softmax Regression classifier
 # Use stochastic approach to save time
@@ -44,18 +52,18 @@ solv_algo = 'saga'
 tol = 1e-2
 max_iter = 50
 sm = sklearn.linear_model.LogisticRegression(\
-    solver=solv_algo, tol=tol, max_iter = max_iter) 
+    solver=solv_algo, tol=tol, max_iter = max_iter, n_jobs=-1) 
 
 #Train Knn Classifier
 neighbors = 4
 weight = 'distance'
-knn = sklearn.neighbors.KNeighborsClassifier(n_neighbors=neighbors)
+knn = sklearn.neighbors.KNeighborsClassifier(n_neighbors=neighbors, n_jobs=-1)
 
 er = sklearn.ensemble.VotingClassifier(
     estimators=[('SoftMax', sm),
                 ('RandomForest', rf),
                 ('Knn', knn)
-                ],voting='soft')
+                ],voting='soft', n_jobs=-1)
 
 #Declare array for results
 results = []
