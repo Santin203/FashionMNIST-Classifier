@@ -4,6 +4,7 @@
 # By Jose Campos
 # Based on codes made by Juan Carlos Rojas
 # Copyright 2024, Texas Tech University - Costa Rica
+# Modified by: Jose Campos
 
 import pickle
 import numpy as np

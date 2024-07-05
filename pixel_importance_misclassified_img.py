@@ -3,6 +3,7 @@
 # Random Forest Classifier, analysis of pixel importance
 # By Juan Carlos Rojas
 # Copyright 2024, Texas Tech University - Costa Rica
+# Modified by: Santiago Jimenez
 
 import pickle
 import numpy as np
@@ -106,6 +107,8 @@ while (num_displayed < 10):
 
     # Display the images
     image = test_data[x].reshape(28,28)
+    
+    # Note: matplotlib 3.9.X has a bug when plotting some of the images, matplotlib 3.8.X works fine
     plt.figure()
     plt.imshow(image, cmap="gray_r")
     plt.title("Predicted: "+str(pred[x])+" Correct: "+str(test_labels[x]))

@@ -3,6 +3,7 @@
 # Exoploration of data
 # By Juan Carlos Rojas
 # Copyright 2024, Texas Tech University - Costa Rica
+# Modified by: William He Yu
 
 import pickle
 import numpy as np

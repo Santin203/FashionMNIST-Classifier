@@ -1,9 +1,9 @@
 # Introduction to Artificial Intelligence
 # MNIST Dataset
 # Heterogeneous Ensemble Classifier
-# By Jose Campos and William He Yu
 # Based on codes made by Juan Carlos Rojas
 # Copyright 2024, Texas Tech University - Costa Rica
+# Modified by: Jose Campos, Santiago Jimenez and William He Yu
 
 import pickle
 import numpy as np
